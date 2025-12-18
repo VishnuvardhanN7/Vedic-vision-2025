@@ -1,0 +1,16 @@
+# dependencies
+node_modules/
+
+# env files
+.env
+
+# build output
+dist/
+build/
+
+# zip files
+*.zip
+
+# editor files
+.vscode/
+.DS_Store

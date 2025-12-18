@@ -1,0 +1,53 @@
+.symptom-checker {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  background: #fff;
+}
+
+.symptom-checker h2 {
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.symptom-checker textarea {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  resize: none;
+  margin-bottom: 1rem;
+}
+
+.symptom-checker button {
+  background: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  width: 100%;
+}
+
+.symptom-checker button:disabled {
+  background: #999;
+  cursor: not-allowed;
+}
+
+.result {
+  margin-top: 1rem;
+  padding: 1rem;
+  border-radius: 8px;
+}
+
+.result.success {
+  background: #e6ffed;
+  border: 1px solid #00c853;
+}
+
+.result.error {
+  background: #ffe6e6;
+  border: 1px solid #ff1744;
+}
