@@ -1,16 +1,6 @@
-# dependencies
-node_modules/
-
-# env files
-.env
-
-# build output
+/node_modules
+/frontend/dist
 dist/
-build/
-
-# zip files
-*.zip
-
-# editor files
-.vscode/
-.DS_Store
+node_modules/
+*.log
+.env
