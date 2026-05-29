@@ -8,7 +8,7 @@ import Image5Click from "./Image5Click";
 import Image6Click from "./Image6Click";
 import Image7Click from "./Image7Click";
 import Image8Click from "./Image8Click";
-import Image9Click from "./Image9Click";
+import Image9Click from "./image9Click";
 import bgImage from "./images/original.jpg";
 import oneImage from "./images/i8.jpg";
 import twoImage from "./images/i12.jpg";
