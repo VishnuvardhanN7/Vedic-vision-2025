@@ -28,8 +28,8 @@ function MainPage() {
       className="main-section"
       style={{
         backgroundImage: `url(${bgImage})`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
+        backgroundSize: "contain",
+        backgroundPosition: "top center",
         backgroundRepeat: "no-repeat",
         minHeight: "100vh",
         margin: 0,
