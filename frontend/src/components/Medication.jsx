@@ -12,6 +12,7 @@ export default function MedicationReminder() {
     morning: "",
     afternoon: "",
     evening: "",
+    dose: "",
     duration: "",
   });
 
@@ -35,6 +36,7 @@ export default function MedicationReminder() {
     const newMedication = {
       id: Date.now(),
       name,
+      dose: form.dose || "",
       times,
       duration: parsedDuration,
       email,
@@ -96,29 +98,33 @@ export default function MedicationReminder() {
               <div className="med-details">
                 <FontAwesomeIcon icon={faPills} />
                 <div>
-                  <strong>{med.name}</strong>
-                  <br />
-                  <small>
-                    <FontAwesomeIcon icon={faClock} />{" "}
-                    {med.times.length ? med.times.join(" • ") : "No times set"}
-                  </small>
-                  <br />
-                  <small>Duration: {med.duration} day{med.duration > 1 ? "s" : ""}</small>
-                  <br />
-                  <small>Email: {med.email}</small>
+                  <strong className="med-title">{med.name}</strong>
+                  <div className="med-sub">
+                    <span className="dose">{med.dose || "—"}</span>
+                    <span className="dot">•</span>
+                    <span className="time">{med.times.length ? `Daily at ${med.times[0]}` : "No times set"}</span>
+                  </div>
+                  <div className="med-meta">
+                    <small>Duration: {med.duration} day{med.duration > 1 ? "s" : ""}</small>
+                    <small className="email">Email: {med.email}</small>
+                  </div>
                 </div>
               </div>
-              <button className="remove-btn" onClick={() => removeMedication(med.id)}>
-                Remove
-              </button>
+              <div className="card-actions">
+                <button className="take-btn">Take</button>
+                <button className="mark-btn" onClick={() => removeMedication(med.id)}>Mark as Taken</button>
+              </div>
             </div>
           ))
         )}
       </div>
 
       <div className="voice-info">
-        <FontAwesomeIcon icon={faEnvelope} className="icon" />
-        <strong>Email Notifications:</strong> You will receive an email reminder for your medication
+        <div className="voice-left">
+          <FontAwesomeIcon icon={faEnvelope} className="icon" />
+          <strong>EMAIL NOTIFICATIONS:</strong>
+        </div>
+        <div className="voice-right">You will receive an automated email reminder 15 minutes before each dose.</div>
       </div>
 
       {showModal && (
@@ -156,6 +162,9 @@ export default function MedicationReminder() {
             <input type="time" id="evening" value={form.evening} onChange={handleChange} />
             <div className="help">Suggested: 18:00–21:00</div>
 
+            <label htmlFor="dose">Dose (optional)</label>
+            <input type="text" id="dose" placeholder="e.g., 1000 IU, 81mg" value={form.dose} onChange={handleChange} />
+
             <label htmlFor="duration">Duration (Days)</label>
             <input
               type="number"
@@ -180,3 +189,5 @@ export default function MedicationReminder() {
     </div>
   );
 }
+
+

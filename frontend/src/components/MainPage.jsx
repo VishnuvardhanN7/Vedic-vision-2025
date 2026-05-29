@@ -27,9 +27,10 @@ function MainPage() {
     <div
       className="main-section"
       style={{
-        backgroundImage: `url(${bgImage})`, // optional, keep image if needed
+        backgroundImage: `url(${bgImage})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
         minHeight: "100vh",
         margin: 0,
         padding: 0,

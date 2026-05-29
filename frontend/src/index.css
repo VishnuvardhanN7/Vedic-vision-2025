@@ -1,9 +1,13 @@
 #root {
-  background-image: url('./images/b2.jpg');
+  background-image: url('./components/images/b2.jpg');
   background-size: cover;
   background-position: center;
   min-height: 100vh;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
 }

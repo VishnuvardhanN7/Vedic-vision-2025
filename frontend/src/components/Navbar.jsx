@@ -1,12 +1,12 @@
-import '../App.css';
+import "../App.css";
 
-export default function Navbar() {
+export default function Navbar({ userName, onLogout }) {
     return (
         <div className="navbar">
             <div className="nav-left">AMMA.in</div>
             <div className="nav-right">
-                <button className="login-btn">Login</button>
-                <button className="signup-btn">Signup</button>
+                {userName ? <span className="welcome-chip">Hi, {userName}</span> : null}
+                <button className="signup-btn" onClick={onLogout}>Logout</button>
             </div>
         </div>
     );
