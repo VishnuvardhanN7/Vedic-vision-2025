@@ -276,31 +276,17 @@
 .main-section {
   position: relative;
   width: 100%;
-  min-height: clamp(760px, 88vw, 1160px);
+  min-height: clamp(620px, 78vw, 980px);
   margin: 0 auto;
   overflow: hidden;
   display: block;
-  padding-top: clamp(24px, 4vw, 44px);
-}
-
-.main-section::before {
-  content: "";
-  position: absolute;
-  left: 50%;
-  top: 0;
-  width: min(1180px, 96vw);
-  aspect-ratio: 1;
-  transform: translateX(-50%);
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.96);
-  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.08);
-  z-index: 0;
+  padding-top: clamp(14px, 2vw, 28px);
 }
 
 .main-section img {
   position: absolute;
   left: 50%;
-  top: 48%;
+  top: 42%;
   width: clamp(92px, 8vw, 150px);
   height: clamp(92px, 8vw, 150px);
   border-radius: 50%;
@@ -318,84 +304,68 @@
 }
 
 .one {
-  --icon-shift: rotate(215deg) translateY(clamp(-290px, -26vw, -390px)) rotate(-215deg);
+  --icon-shift: rotate(210deg) translateY(clamp(-250px, -24vw, -340px)) rotate(-210deg);
 }
 
 .two {
-  --icon-shift: rotate(242deg) translateY(clamp(-285px, -25vw, -380px)) rotate(-242deg);
+  --icon-shift: rotate(240deg) translateY(clamp(-245px, -23vw, -332px)) rotate(-240deg);
 }
 
 .three {
-  --icon-shift: rotate(270deg) translateY(clamp(-295px, -26vw, -395px)) rotate(-270deg);
+  --icon-shift: rotate(270deg) translateY(clamp(-240px, -22vw, -324px)) rotate(-270deg);
 }
 
 .four {
-  --icon-shift: rotate(298deg) translateY(clamp(-295px, -26vw, -395px)) rotate(-298deg);
+  --icon-shift: rotate(300deg) translateY(clamp(-245px, -23vw, -332px)) rotate(-300deg);
 }
 
 .five {
-  --icon-shift: rotate(326deg) translateY(clamp(-300px, -27vw, -402px)) rotate(-326deg);
+  --icon-shift: rotate(330deg) translateY(clamp(-250px, -24vw, -340px)) rotate(-330deg);
 }
 
 .six {
-  --icon-shift: rotate(34deg) translateY(clamp(-300px, -27vw, -402px)) rotate(-34deg);
+  display: none;
 }
 
 .seven {
-  --icon-shift: rotate(62deg) translateY(clamp(-295px, -26vw, -395px)) rotate(-62deg);
+  display: none;
 }
 
 .eight {
-  --icon-shift: rotate(90deg) translateY(clamp(-285px, -25vw, -380px)) rotate(-90deg);
+  display: none;
 }
 
 .nine {
-  --icon-shift: rotate(118deg) translateY(clamp(-290px, -26vw, -390px)) rotate(-118deg);
+  display: none;
 }
 
 @media (max-width: 1100px) {
   .main-section {
-    min-height: clamp(650px, 112vw, 980px);
+    min-height: clamp(560px, 94vw, 860px);
   }
 
-  .main-section::before {
-    width: min(1020px, 98vw);
-  }
-
-  .one { --icon-shift: rotate(214deg) translateY(clamp(-250px, -28vw, -330px)) rotate(-214deg); }
-  .two { --icon-shift: rotate(242deg) translateY(clamp(-246px, -27vw, -324px)) rotate(-242deg); }
-  .three { --icon-shift: rotate(270deg) translateY(clamp(-250px, -28vw, -332px)) rotate(-270deg); }
-  .four { --icon-shift: rotate(298deg) translateY(clamp(-250px, -28vw, -332px)) rotate(-298deg); }
-  .five { --icon-shift: rotate(326deg) translateY(clamp(-252px, -29vw, -336px)) rotate(-326deg); }
-  .six { --icon-shift: rotate(34deg) translateY(clamp(-252px, -29vw, -336px)) rotate(-34deg); }
-  .seven { --icon-shift: rotate(62deg) translateY(clamp(-250px, -28vw, -332px)) rotate(-62deg); }
-  .eight { --icon-shift: rotate(90deg) translateY(clamp(-246px, -27vw, -324px)) rotate(-90deg); }
-  .nine { --icon-shift: rotate(118deg) translateY(clamp(-250px, -28vw, -330px)) rotate(-118deg); }
+  .one { --icon-shift: rotate(210deg) translateY(clamp(-220px, -25vw, -300px)) rotate(-210deg); }
+  .two { --icon-shift: rotate(240deg) translateY(clamp(-216px, -24vw, -292px)) rotate(-240deg); }
+  .three { --icon-shift: rotate(270deg) translateY(clamp(-212px, -23vw, -286px)) rotate(-270deg); }
+  .four { --icon-shift: rotate(300deg) translateY(clamp(-216px, -24vw, -292px)) rotate(-300deg); }
+  .five { --icon-shift: rotate(330deg) translateY(clamp(-220px, -25vw, -300px)) rotate(-330deg); }
 }
 
 @media (max-width: 700px) {
   .main-section {
-    min-height: clamp(560px, 150vw, 860px);
+    min-height: clamp(480px, 132vw, 720px);
   }
 
   .main-section img {
-    width: clamp(68px, 14vw, 108px);
-    height: clamp(68px, 14vw, 108px);
+    width: clamp(62px, 13vw, 96px);
+    height: clamp(62px, 13vw, 96px);
   }
 
-  .main-section::before {
-    width: min(820px, 98vw);
-  }
-
-  .one { --icon-shift: rotate(214deg) translateY(clamp(-205px, -30vw, -275px)) rotate(-214deg); }
-  .two { --icon-shift: rotate(242deg) translateY(clamp(-202px, -29vw, -270px)) rotate(-242deg); }
-  .three { --icon-shift: rotate(270deg) translateY(clamp(-205px, -30vw, -275px)) rotate(-270deg); }
-  .four { --icon-shift: rotate(298deg) translateY(clamp(-205px, -30vw, -275px)) rotate(-298deg); }
-  .five { --icon-shift: rotate(326deg) translateY(clamp(-207px, -31vw, -278px)) rotate(-326deg); }
-  .six { --icon-shift: rotate(34deg) translateY(clamp(-207px, -31vw, -278px)) rotate(-34deg); }
-  .seven { --icon-shift: rotate(62deg) translateY(clamp(-205px, -30vw, -275px)) rotate(-62deg); }
-  .eight { --icon-shift: rotate(90deg) translateY(clamp(-202px, -29vw, -270px)) rotate(-90deg); }
-  .nine { --icon-shift: rotate(118deg) translateY(clamp(-205px, -30vw, -275px)) rotate(-118deg); }
+  .one { --icon-shift: rotate(210deg) translateY(clamp(-180px, -26vw, -242px)) rotate(-210deg); }
+  .two { --icon-shift: rotate(240deg) translateY(clamp(-176px, -25vw, -236px)) rotate(-240deg); }
+  .three { --icon-shift: rotate(270deg) translateY(clamp(-172px, -24vw, -230px)) rotate(-270deg); }
+  .four { --icon-shift: rotate(300deg) translateY(clamp(-176px, -25vw, -236px)) rotate(-300deg); }
+  .five { --icon-shift: rotate(330deg) translateY(clamp(-180px, -26vw, -242px)) rotate(-330deg); }
 }
 
 /* Popup content box */
