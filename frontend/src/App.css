@@ -276,7 +276,7 @@
 .main-section {
   position: relative;
   width: 100%;
-  min-height: clamp(620px, 78vw, 980px);
+  min-height: clamp(700px, 86vw, 1080px);
   margin: 0 auto;
   overflow: hidden;
   display: block;
@@ -286,7 +286,7 @@
 .main-section img {
   position: absolute;
   left: 50%;
-  top: 42%;
+  top: 43%;
   width: clamp(92px, 8vw, 150px);
   height: clamp(92px, 8vw, 150px);
   border-radius: 50%;
@@ -295,32 +295,37 @@
   cursor: pointer;
   transition: transform 0.2s ease;
   z-index: 2;
-  transform: translate(-50%, -50%) var(--icon-shift, translate(0, 0));
+  transform: translate(-50%, -50%);
 }
 
 .main-section img:hover {
-  transform: translate(-50%, -50%) var(--icon-shift, translate(0, 0)) scale(1.05);
+  transform: translate(-50%, -50%) scale(1.05);
   box-shadow: 0 4px 15px rgb(236, 225, 21);
 }
 
 .one {
-  --icon-shift: rotate(210deg) translateY(clamp(-250px, -24vw, -340px)) rotate(-210deg);
+  top: 18%;
+  left: 38%;
 }
 
 .two {
-  --icon-shift: rotate(240deg) translateY(clamp(-245px, -23vw, -332px)) rotate(-240deg);
+  top: 30%;
+  left: 32%;
 }
 
 .three {
-  --icon-shift: rotate(270deg) translateY(clamp(-240px, -22vw, -324px)) rotate(-270deg);
+  top: 45%;
+  left: 30%;
 }
 
 .four {
-  --icon-shift: rotate(300deg) translateY(clamp(-245px, -23vw, -332px)) rotate(-300deg);
+  top: 30%;
+  left: 62%;
 }
 
 .five {
-  --icon-shift: rotate(330deg) translateY(clamp(-250px, -24vw, -340px)) rotate(-330deg);
+  top: 18%;
+  left: 56%;
 }
 
 .six {
@@ -341,31 +346,31 @@
 
 @media (max-width: 1100px) {
   .main-section {
-    min-height: clamp(560px, 94vw, 860px);
+    min-height: clamp(620px, 96vw, 940px);
   }
 
-  .one { --icon-shift: rotate(210deg) translateY(clamp(-220px, -25vw, -300px)) rotate(-210deg); }
-  .two { --icon-shift: rotate(240deg) translateY(clamp(-216px, -24vw, -292px)) rotate(-240deg); }
-  .three { --icon-shift: rotate(270deg) translateY(clamp(-212px, -23vw, -286px)) rotate(-270deg); }
-  .four { --icon-shift: rotate(300deg) translateY(clamp(-216px, -24vw, -292px)) rotate(-300deg); }
-  .five { --icon-shift: rotate(330deg) translateY(clamp(-220px, -25vw, -300px)) rotate(-330deg); }
+  .one { top: 17%; left: 34%; }
+  .two { top: 30%; left: 28%; }
+  .three { top: 46%; left: 27%; }
+  .four { top: 30%; left: 58%; }
+  .five { top: 17%; left: 52%; }
 }
 
 @media (max-width: 700px) {
   .main-section {
-    min-height: clamp(480px, 132vw, 720px);
+    min-height: clamp(540px, 138vw, 780px);
   }
 
   .main-section img {
-    width: clamp(62px, 13vw, 96px);
-    height: clamp(62px, 13vw, 96px);
+    width: clamp(62px, 13vw, 98px);
+    height: clamp(62px, 13vw, 98px);
   }
 
-  .one { --icon-shift: rotate(210deg) translateY(clamp(-180px, -26vw, -242px)) rotate(-210deg); }
-  .two { --icon-shift: rotate(240deg) translateY(clamp(-176px, -25vw, -236px)) rotate(-240deg); }
-  .three { --icon-shift: rotate(270deg) translateY(clamp(-172px, -24vw, -230px)) rotate(-270deg); }
-  .four { --icon-shift: rotate(300deg) translateY(clamp(-176px, -25vw, -236px)) rotate(-300deg); }
-  .five { --icon-shift: rotate(330deg) translateY(clamp(-180px, -26vw, -242px)) rotate(-330deg); }
+  .one { top: 18%; left: 30%; }
+  .two { top: 30%; left: 22%; }
+  .three { top: 48%; left: 20%; }
+  .four { top: 30%; left: 60%; }
+  .five { top: 18%; left: 52%; }
 }
 
 /* Popup content box */
