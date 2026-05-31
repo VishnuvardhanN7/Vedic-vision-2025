@@ -38,6 +38,44 @@ const transporter = nodemailer.createTransport({
 
 const emailReady = Boolean(process.env.EMAIL_USER && process.env.EMAIL_PASS);
 
+// Verify transporter at startup to provide clearer diagnostics
+if (emailReady) {
+  transporter.verify((err, success) => {
+    if (err) {
+      console.error("❌ SMTP verification failed:", err.message || err);
+    } else {
+      console.log("✅ SMTP transporter verified and ready to send emails.");
+    }
+  });
+} else {
+  console.warn("⚠️ EMAIL_USER or EMAIL_PASS missing — email functionality disabled until configured.");
+}
+
+// Endpoint to trigger an immediate test email (useful for debugging credentials)
+app.post("/send-test-email", async (req, res) => {
+  const to = req.body?.to || req.query?.to || process.env.EMAIL_TEST_TO;
+  if (!emailReady) {
+    return res.status(500).json({ error: "Email service not configured (EMAIL_USER/EMAIL_PASS missing)" });
+  }
+  if (!to) return res.status(400).json({ error: "Recipient email required as 'to' in body or query" });
+
+  const mailOptions = {
+    from: process.env.EMAIL_USER,
+    to,
+    subject: "[Test] Medication Reminder - Test Email",
+    text: "This is a test email from the Med Reminder backend to verify SMTP configuration.",
+  };
+
+  try {
+    const info = await transporter.sendMail(mailOptions);
+    console.log("📧 Test email sent:", info.response || info);
+    res.json({ success: true, info: info.response || info });
+  } catch (err) {
+    console.error("❌ Test email failed:", err);
+    res.status(500).json({ error: err.message || err });
+  }
+});
+
 console.log("📧 Email config:", {
   user: process.env.EMAIL_USER,
   pass: process.env.EMAIL_PASS ? "****" : "MISSING",
