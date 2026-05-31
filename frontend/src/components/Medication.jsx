@@ -133,8 +133,7 @@ export default function MedicationReminder() {
                 </div>
               </div>
               <div className="card-actions">
-                <button className="take-btn">Take</button>
-                <button className="mark-btn" onClick={() => removeMedication(med.id)}>Mark as Taken</button>
+                <button className="remove-btn" onClick={() => removeMedication(med.id)}>Remove</button>
               </div>
             </div>
           ))
