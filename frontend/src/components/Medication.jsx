@@ -6,6 +6,7 @@ import { faPills, faPlus, faEnvelope, faClock } from "@fortawesome/free-solid-sv
 export default function MedicationReminder() {
   const [medications, setMedications] = useState([]);
   const [showModal, setShowModal] = useState(false);
+  const [statusMessage, setStatusMessage] = useState("");
   const [form, setForm] = useState({
     email: "",
     name: "",
@@ -45,23 +46,44 @@ export default function MedicationReminder() {
     setMedications((prev) => [...prev, newMedication]);
     setForm({ email: "", name: "", morning: "", afternoon: "", evening: "", duration: "" });
     closeModal();
+    setStatusMessage("");
 
     // Call backend to schedule reminders
-    times.forEach((time) => {
-      fetch(`${import.meta.env.VITE_BACKEND_URL || "http://localhost:3000"}/schedule-email`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          tabletName: name,
-          time,
-          email,
-          duration: parsedDuration,
-        }),
+    Promise.all(
+      times.map(async (time) => {
+        const response = await fetch(`${import.meta.env.VITE_BACKEND_URL || "http://localhost:3000"}/schedule-email`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            tabletName: name,
+            time,
+            email,
+            duration: parsedDuration,
+          }),
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+          throw new Error(data.error || "Unable to schedule reminder email.");
+        }
+
+        return data;
       })
-        .then((res) => res.json())
-        .then((data) => console.log("Email scheduled:", data))
-        .catch((err) => console.error("Error scheduling email:", err));
-    });
+    )
+      .then((results) => {
+        const scheduledTimes = results.map((item) => item.scheduledFor || item.reminderFor).filter(Boolean).join(", ");
+        setStatusMessage(
+          scheduledTimes
+            ? `Reminder email scheduled for ${name} at ${scheduledTimes}.`
+            : `Reminder email scheduled for ${name}.`
+        );
+      })
+      .catch((err) => {
+        console.error("Error scheduling email:", err);
+        setStatusMessage(err.message || "Could not schedule reminder email.");
+        alert(err.message || "Could not schedule reminder email.");
+      });
   };
 
   const removeMedication = (id) => {
@@ -124,8 +146,10 @@ export default function MedicationReminder() {
           <FontAwesomeIcon icon={faEnvelope} className="icon" />
           <strong>EMAIL NOTIFICATIONS:</strong>
         </div>
-        <div className="voice-right">You will receive an automated email reminder 15 minutes before each dose.</div>
+        <div className="voice-right">You will receive an automated email reminder at the scheduled time.</div>
       </div>
+
+      {statusMessage ? <p className="auth-message" style={{ marginTop: "10px" }}>{statusMessage}</p> : null}
 
       {showModal && (
         <div className="modal">

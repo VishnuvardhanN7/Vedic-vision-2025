@@ -36,6 +36,8 @@ const transporter = nodemailer.createTransport({
   },
 });
 
+const emailReady = Boolean(process.env.EMAIL_USER && process.env.EMAIL_PASS);
+
 console.log("📧 Email config:", {
   user: process.env.EMAIL_USER,
   pass: process.env.EMAIL_PASS ? "****" : "MISSING",
@@ -126,7 +128,17 @@ app.post("/schedule-email", (req, res) => {
     return res.status(400).json({ error: "Tablet name, time, and email are required" });
   }
 
+  if (!emailReady) {
+    return res.status(500).json({
+      error: "Email service is not configured. Set EMAIL_USER and EMAIL_PASS in backend/.env.",
+    });
+  }
+
   const [hour, minute] = time.split(":");
+  if (isNaN(Number(hour)) || isNaN(Number(minute))) {
+    return res.status(400).json({ error: "Invalid time format. Use HH:MM." });
+  }
+
   const cronExpression = `${minute} ${hour} * * *`;
   let daysLeft = duration || 1;
 
@@ -141,7 +153,7 @@ app.post("/schedule-email", (req, res) => {
       const mailOptions = {
         from: process.env.EMAIL_USER,
         to: email,
-        subject: `💊 Tablet Reminder: ${tabletName}`,
+        subject: `Tablet Reminder: ${tabletName}`,
         text: `Hello!\n\nThis is a reminder to take your tablet: ${tabletName}.\nScheduled Time: ${time}\n\nStay healthy!\n\n- Your Med Reminder App`,
       };
 
