@@ -42,9 +42,27 @@ async function initTransporter() {
       },
     });
 
-    transporter.verify((err) => {
-      if (err) console.error("❌ SMTP verification failed:", err.message || err);
-      else console.log("✅ SMTP transporter verified and ready to send emails.");
+    transporter.verify(async (err) => {
+      if (err) {
+        console.error("❌ SMTP verification failed:", err.message || err);
+        // fallback to Ethereal for development/debugging
+        try {
+          const testAccount = await nodemailer.createTestAccount();
+          transporter = nodemailer.createTransport({
+            host: testAccount.smtp.host,
+            port: testAccount.smtp.port,
+            secure: testAccount.smtp.secure,
+            auth: { user: testAccount.user, pass: testAccount.pass },
+          });
+          usingEthereal = true;
+          console.warn("⚠️ Falling back to Ethereal test account due to SMTP verification failure.");
+          console.log(`Ethereal test account user=${testAccount.user} pass=${testAccount.pass}`);
+        } catch (fallErr) {
+          console.error("❌ Failed to create Ethereal test account:", fallErr);
+        }
+      } else {
+        console.log("✅ SMTP transporter verified and ready to send emails.");
+      }
     });
   } else {
     // create ethereal test account for local debugging
