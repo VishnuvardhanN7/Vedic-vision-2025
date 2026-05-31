@@ -28,39 +28,56 @@ const MONGODB_URI =
   process.env.MONGODB_URI ||
   "mongodb://127.0.0.1:27017/vedic_vision_2026";
 
-const transporter = nodemailer.createTransport({
-  service: "gmail",
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS,
-  },
-});
-
+let transporter;
+let usingEthereal = false;
 const emailReady = Boolean(process.env.EMAIL_USER && process.env.EMAIL_PASS);
 
-// Verify transporter at startup to provide clearer diagnostics
-if (emailReady) {
-  transporter.verify((err, success) => {
-    if (err) {
-      console.error("❌ SMTP verification failed:", err.message || err);
-    } else {
-      console.log("✅ SMTP transporter verified and ready to send emails.");
+async function initTransporter() {
+  if (emailReady) {
+    transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS,
+      },
+    });
+
+    transporter.verify((err) => {
+      if (err) console.error("❌ SMTP verification failed:", err.message || err);
+      else console.log("✅ SMTP transporter verified and ready to send emails.");
+    });
+  } else {
+    // create ethereal test account for local debugging
+    try {
+      const testAccount = await nodemailer.createTestAccount();
+      transporter = nodemailer.createTransport({
+        host: testAccount.smtp.host,
+        port: testAccount.smtp.port,
+        secure: testAccount.smtp.secure,
+        auth: { user: testAccount.user, pass: testAccount.pass },
+      });
+      usingEthereal = true;
+      console.warn("⚠️ EMAIL_USER/EMAIL_PASS not set — using Ethereal test account for email preview.");
+      console.log(`Ethereal test account user=${testAccount.user} pass=${testAccount.pass}`);
+    } catch (err) {
+      console.error("❌ Failed to create Ethereal test account:", err);
     }
-  });
-} else {
-  console.warn("⚠️ EMAIL_USER or EMAIL_PASS missing — email functionality disabled until configured.");
+  }
 }
+
+// Initialize transporter now
+initTransporter();
 
 // Endpoint to trigger an immediate test email (useful for debugging credentials)
 app.post("/send-test-email", async (req, res) => {
   const to = req.body?.to || req.query?.to || process.env.EMAIL_TEST_TO;
-  if (!emailReady) {
-    return res.status(500).json({ error: "Email service not configured (EMAIL_USER/EMAIL_PASS missing)" });
+  if (!transporter) {
+    return res.status(500).json({ error: "Email transporter not initialized" });
   }
   if (!to) return res.status(400).json({ error: "Recipient email required as 'to' in body or query" });
 
   const mailOptions = {
-    from: process.env.EMAIL_USER,
+    from: process.env.EMAIL_USER || "no-reply@example.com",
     to,
     subject: "[Test] Medication Reminder - Test Email",
     text: "This is a test email from the Med Reminder backend to verify SMTP configuration.",
@@ -69,7 +86,8 @@ app.post("/send-test-email", async (req, res) => {
   try {
     const info = await transporter.sendMail(mailOptions);
     console.log("📧 Test email sent:", info.response || info);
-    res.json({ success: true, info: info.response || info });
+    const preview = usingEthereal ? nodemailer.getTestMessageUrl(info) : null;
+    res.json({ success: true, info: info.response || info, preview });
   } catch (err) {
     console.error("❌ Test email failed:", err);
     res.status(500).json({ error: err.message || err });
