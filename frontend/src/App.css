@@ -869,6 +869,197 @@ body {
   text-align: center;
 }
 
+@media (max-width: 768px) {
+  .landing-page {
+    padding: 12px;
+    align-items: flex-start;
+  }
+
+  .landing-overlay {
+    border-radius: 20px;
+  }
+
+  .landing-topbar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 16px;
+  }
+
+  .brand {
+    font-size: 24px;
+    letter-spacing: 1px;
+  }
+
+  .landing-actions {
+    width: 100%;
+  }
+
+  .landing-actions .landing-btn {
+    flex: 1;
+    padding: 10px 12px;
+  }
+
+  .landing-content {
+    padding: 18px 16px 20px;
+    gap: 18px;
+  }
+
+  .landing-copy h1 {
+    font-size: clamp(28px, 10vw, 38px);
+  }
+
+  .landing-copy p {
+    font-size: 15px;
+  }
+
+  .navbar {
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 12px 14px;
+  }
+
+  .nav-left {
+    font-size: 22px;
+    letter-spacing: 1px;
+  }
+
+  .nav-right {
+    width: 100%;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+  }
+
+  .welcome-chip {
+    width: 100%;
+    text-align: center;
+  }
+
+  .main-section {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+    padding: 16px 12px 24px;
+    align-content: start;
+  }
+
+  .main-section img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1 / 1;
+    margin: 0 !important;
+    border-radius: 22px;
+  }
+
+  .main-section .one,
+  .main-section .two,
+  .main-section .three,
+  .main-section .four,
+  .main-section .five,
+  .main-section .six,
+  .main-section .seven,
+  .main-section .eight,
+  .main-section .nine {
+    margin: 0 !important;
+  }
+
+  .popup-overlay {
+    padding: 12px;
+    align-items: flex-start;
+    overflow-y: auto;
+  }
+
+  .popup-content {
+    width: 100%;
+    max-width: none;
+    max-height: calc(100vh - 24px);
+    padding: 18px 16px;
+    border-radius: 18px;
+  }
+
+  .popup-header {
+    font-size: 20px;
+  }
+
+  .close-btn {
+    font-size: 30px;
+  }
+
+  .image-row {
+    gap: 10px;
+  }
+
+  .image-row img {
+    width: 72px;
+    height: 72px;
+  }
+
+  .checkbox-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    padding: 12px;
+  }
+
+  .checkbox-grid label {
+    font-size: 13px;
+  }
+
+  #submitSymptomsBtn {
+    width: 100%;
+    font-size: 15px;
+    padding: 11px 20px;
+  }
+
+  #selectedDisplay {
+    font-size: 13px;
+  }
+
+  .age-input-container {
+    margin-bottom: 12px;
+  }
+
+  .age-input {
+    width: 100%;
+    max-width: 180px;
+  }
+}
+
+@media (max-width: 480px) {
+  .landing-actions {
+    flex-direction: column;
+  }
+
+  .landing-actions .landing-btn {
+    width: 100%;
+  }
+
+  .main-section {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .popup-content {
+    padding: 16px 14px;
+  }
+
+  .image-row {
+    gap: 8px;
+  }
+
+  .image-row img {
+    width: 64px;
+    height: 64px;
+  }
+
+  .nav-right {
+    justify-content: stretch;
+  }
+
+  .nav-right .signup-btn {
+    width: 100%;
+  }
+}
+
 
 
 
